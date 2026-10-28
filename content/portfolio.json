@@ -1,0 +1,7 @@
+[
+  {"id":"edificios","name":"Edificios","title":"La ciudad, a otra escala.","description":"Volúmenes, fachadas y detalles. Una manera de acercarse a la arquitectura y comprender el edificio en su conjunto.","projects":["Sudameris","More Mariscal","Riviere","Pedras","More Plaza","Narciso"]},
+  {"id":"loteamientos","name":"Loteamientos","title":"Una mirada al conjunto.","description":"El territorio se vuelve tangible. Trazados, parcelas y espacios compartidos que se pueden comprender en una misma escala.","projects":["Sunset Village","Los Pingos","Portal Santa Rita","Benedicta"]},
+  {"id":"viviendas","name":"Viviendas","title":"Habitar una idea.","description":"La relación entre los espacios, el volumen y el entorno. Una perspectiva cercana de la arquitectura residencial.","projects":["Turín","Naturalis"]},
+  {"id":"especiales","name":"Especiales","title":"Cada historia, una forma.","description":"Piezas que responden a un propósito particular. Arquitectura, memoria e identidad llevadas a escala.","projects":["Palacio Alegre","UNVES","Pioneros del Chaco"]},
+  {"id":"hapticas","name":"Hápticas","title":"La arquitectura también se toca.","description":"Una aproximación a la forma a través del tacto. Maquetas para descubrir volúmenes y relaciones espaciales con las manos.","projects":["Palacio López","Panteón"]}
+]
