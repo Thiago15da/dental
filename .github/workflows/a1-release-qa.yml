@@ -1,0 +1,39 @@
+name: A1 Maquetas — Validación previa de dominio
+
+on:
+  push:
+    branches:
+      - release/a1maquetas-com-py-2026
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generar y comprobar páginas desde el código fuente
+        run: |
+          python3 scripts/build.py
+          python3 scripts/check-site.py
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          domain='https://a1maquetas.com.py'
+          pages=['index.html','proyectos.html','edificios.html','loteamientos.html','viviendas.html','especiales.html','hapticas.html','nosotros.html','cotizacion.html']
+          assert (root/'CNAME').read_text().strip()=='a1maquetas.com.py'
+          for name in pages:
+            s=(root/name).read_text()
+            assert 'content="noindex' not in s,(name,'noindex')
+            assert f'<link rel="canonical" href="{domain}/{name}">' in s,(name,'canonical')
+            assert domain+'/assets/photos/a1-residencial.jpg' in s,(name,'og image')
+            assert 'github.io/dental/assets/photos/' not in s,(name,'old og image')
+            assert len(re.findall(r'<h1(?:\s|>)',s))==1,(name,'headings')
+          for path in ['robots.txt','sitemap.xml','.nojekyll']:
+            assert (root/path).exists(),path
+          assert domain+'/sitemap.xml' in (root/'robots.txt').read_text()
+          print('PASS: dominio, metadata, indexación, sitemap y 9 páginas')
+          PY
+      - name: Validar sintaxis JS
+        run: node --check a1.js
