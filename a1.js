@@ -16,17 +16,15 @@ box?.addEventListener('close',()=>priorFocus?.focus());
 qsa('[data-lightbox]').forEach(b=>b.addEventListener('click',()=>openPhoto(b.dataset.lightbox,qs('img',b)?.alt||'',b.dataset.caption||'')));
 const gallery=qs('.gallery');
 if(gallery){
- const slides=qsa('[data-slide]',gallery), numbers=qs('#slideNumber'), captions=['Maqueta residencial · Fotografía de archivo','Santuario de Caacupé · Fotografía de archivo'];
- const sources=['https://www.abc.com.py/edicion-impresa/suplementos/empresas-y-negocios/maquetas-1424849.html','https://www.abc.com.py/edicion-impresa/notas/maqueta-del-santuario-para-el-santo-padre-1386430.html'];
- let current=0,start=null;
- function showSlide(index){current=(index+slides.length)%slides.length;slides.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle('is-active',i===current)});numbers.textContent=String(current+1).padStart(2,'0');qs('.gallery-track i').style.transform=`translateX(${current*100}%)`;qs('#slideCaption').textContent=captions[current];qs('#slideSource').href=sources[current]}
- qs('[data-gallery-prev]').addEventListener('click',()=>showSlide(current-1));qs('[data-gallery-next]').addEventListener('click',()=>showSlide(current+1));
+ const slides=qsa('[data-slide]',gallery), numbers=qs('#slideNumber');let current=0,start=null;
+ function showSlide(index){current=(index+slides.length)%slides.length;slides.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle('is-active',i===current)});numbers.textContent=String(current+1).padStart(2,'0');qs('.gallery-track i',gallery).style.transform=`translateX(${current*100}%)`;qs('#slideCaption',gallery).textContent=slides[current].dataset.caption;qs('#slideSource',gallery).href=slides[current].dataset.href}
+ qs('[data-gallery-prev]',gallery).addEventListener('click',()=>showSlide(current-1));qs('[data-gallery-next]',gallery).addEventListener('click',()=>showSlide(current+1));
  gallery.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();showSlide(current+(e.key==='ArrowRight'?1:-1))}});
- const stage=qs('.gallery-stage');stage.style.touchAction='pan-y';
+ const stage=qs('.gallery-stage',gallery);stage.style.touchAction='pan-y';
  stage.addEventListener('pointerdown',e=>{if(!e.target.closest('button')&&e.isPrimary){start={x:e.clientX,y:e.clientY,id:e.pointerId};stage.setPointerCapture(e.pointerId)}});
  stage.addEventListener('pointerup',e=>{if(!start||start.id!==e.pointerId)return;const x=e.clientX-start.x,y=e.clientY-start.y;start=null;if(Math.abs(x)>45&&Math.abs(x)>Math.abs(y)*1.4)showSlide(current+(x<0?1:-1))});
  stage.addEventListener('pointercancel',()=>start=null);stage.addEventListener('dragstart',e=>e.preventDefault());
- qs('.gallery-expand').addEventListener('click',()=>{const img=qs('img',slides[current]);openPhoto(img.getAttribute('src'),img.alt,captions[current]+' · ABC Color, 2015')});
+ qs('.gallery-expand',gallery).addEventListener('click',()=>{const img=qs('img',slides[current]);openPhoto(img.getAttribute('src'),img.alt,slides[current].dataset.caption)});
 }
 const search=qs('#projectSearch');
 if(search){
