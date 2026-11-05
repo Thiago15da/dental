@@ -36,12 +36,10 @@ if(search){
 }
 const form=qs('#briefForm');
 if(form){
- const reference=new URLSearchParams(location.search).get('referencia');if(reference)qs('#briefReference').value=reference.slice(0,120);
- const mapping={'Sudameris':'Edificios','More Mariscal':'Edificios','Riviere':'Edificios','Pedras':'Edificios','More Plaza':'Edificios','Narciso':'Edificios','Sunset Village':'Loteamientos','Los Pingos':'Loteamientos','Portal Santa Rita':'Loteamientos','Benedicta':'Loteamientos','Turín':'Viviendas','Naturalis':'Viviendas','Arbolia':'Viviendas','Palacio Alegre':'Especiales','UNVES':'Especiales','Pioneros del Chaco':'Especiales','Palacio López':'Hápticas','Panteón':'Hápticas'};
+ const reference=new URLSearchParams(location.search).get('referencia');
+ if(reference)qs('#briefReference').value=reference.slice(0,120);
+ const mapping={'Sudameris':'Edificios','More Mariscal':'Edificios','Riviere':'Edificios','Pedras':'Edificios','More Plaza':'Edificios','Narciso':'Edificios','Sunset Village':'Loteamientos','Portal Santa Rita':'Loteamientos','Benedicta':'Loteamientos','Turín':'Viviendas','Naturalis':'Viviendas','Arbolia':'Viviendas','Palacio Alegre':'Especiales','UNVES':'Especiales','Pioneros del Chaco':'Especiales','Palacio López':'Hápticas','Panteón':'Hápticas'};
  if(mapping[reference])form.elements.categoria.value=mapping[reference];
- form.addEventListener('change',()=>{const n=qsa('[name=documentos]:checked',form).length;qs('#documentProgress').textContent=`${n} de 3 materiales disponibles`});
- form.addEventListener('submit',e=>{e.preventDefault();const values=new FormData(form),docs=values.getAll('documentos');const name=String(values.get('nombre')||'').trim();if(!name){form.elements.nombre.setCustomValidity('Escribí tu nombre.');form.elements.nombre.reportValidity();return}form.elements.nombre.setCustomValidity('');const ref=String(values.get('referencia')||'').trim(),details=String(values.get('detalles')||'').trim();const text=`Hola, A1 Maquetas. Soy ${name} y quisiera consultar por una maqueta.\n\nTipo de proyecto: ${values.get('categoria')}.${ref?'\nProyecto o referencia: '+ref+'.':''}\nDocumentación disponible: ${docs.length?docs.join(', '):'Todavía por reunir'}.${details?'\n\nSobre mi idea:\n'+details:''}\n\nQuisiera coordinar cómo compartir la documentación y conocer los próximos pasos para cotizar.`;qs('#briefText').value=text;qs('#briefResult').hidden=false;qs('#copyStatus').textContent='';qs('#briefResultTitle').focus({preventScroll:true});qs('#briefResult').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth',block:'start'})});
- form.elements.nombre.addEventListener('input',()=>form.elements.nombre.setCustomValidity(''));
- qs('#copyBrief').addEventListener('click',async()=>{const field=qs('#briefText');try{await navigator.clipboard.writeText(field.value);qs('#copyStatus').textContent='Consulta copiada. Pegala en tu mensaje a @a1maquetas.'}catch{field.focus();field.select();qs('#copyStatus').textContent='Seleccionamos el texto. Copialo con la opción de copiar de tu dispositivo.'}});
+ form.addEventListener('submit',e=>e.preventDefault());
 }
 })();
