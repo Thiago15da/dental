@@ -15,3 +15,5 @@
 .logo-mark{display:block;position:relative;width:48px;height:50px;overflow:hidden;flex:none}.logo-mark img{display:block;max-width:none;width:84px;height:84px;transform:translate(-11px,-13px);filter:brightness(1.25) contrast(1.65);mix-blend-mode:multiply}
 
 .contact-pending{border-left:3px solid var(--teal);padding:15px 18px;background:#e5f2ef;margin-top:24px;font-size:13px}.contact-pending strong{display:block}.brief-form input[type=file]{width:100%;padding:14px;border:1px dashed var(--deep);background:#fff}.brief-form .brief-help{display:block;margin-top:8px;font-size:12px}.brief-form button:disabled{opacity:.48;cursor:not-allowed;transform:none}.optional{font-size:12px;font-weight:400}
+
+.contact-emails{display:grid;gap:18px;margin-top:28px}.brief-intro .contact-emails p{margin:0;font-size:13px;line-height:1.65}.contact-emails a{color:var(--deep);text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}.footer-links a[href^="mailto:"]{overflow-wrap:anywhere}

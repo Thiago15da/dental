@@ -40,6 +40,6 @@ if(form){
  if(reference)qs('#briefReference').value=reference.slice(0,120);
  const mapping={'Sudameris':'Edificios','More Mariscal':'Edificios','Riviere':'Edificios','Pedras':'Edificios','More Plaza':'Edificios','Narciso':'Edificios','Sunset Village':'Loteamientos','Portal Santa Rita':'Loteamientos','Benedicta':'Loteamientos','Turín':'Viviendas','Naturalis':'Viviendas','Arbolia':'Viviendas','Palacio Alegre':'Especiales','UNVES':'Especiales','Pioneros del Chaco':'Especiales','Palacio López':'Hápticas','Panteón':'Hápticas'};
  if(mapping[reference])form.elements.categoria.value=mapping[reference];
- form.addEventListener('submit',e=>e.preventDefault());
+ form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const f=new FormData(form);const lines=['Hola, quisiera solicitar una cotización.','', 'Nombre: '+f.get('nombre'),'Correo: '+f.get('email'),'Tipo de proyecto: '+f.get('categoria'),'Teléfono: '+(f.get('telefono')||'No indicado'),'Referencia: '+(f.get('referencia')||'No indicada'),'','Detalles:',f.get('detalles'),'','Adjuntaré mis archivos a este correo.'];const subject='Consulta de presupuesto'+(f.get('referencia')?' - '+f.get('referencia'):'');window.location.href='mailto:presupuestos@a1maquetas.com.py?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(lines.join('\n'));});
 }
 })();
