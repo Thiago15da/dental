@@ -31,7 +31,7 @@ if(search){
  const rows=qsa('.project-row'),buttons=qsa('[data-filter]'),count=qs('#resultCount');let filter='todos';
  const normalize=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
  const initial=new URLSearchParams(location.search).get('categoria');if(buttons.some(b=>b.dataset.filter===initial))filter=initial;
- function apply(){let n=0;rows.forEach(row=>{const visible=(filter==='todos'||row.dataset.category===filter)&&normalize(row.dataset.projectName).includes(normalize(search.value));row.hidden=!visible;if(visible)n++});buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));count.textContent=`${n} ${n===1?'proyecto':'proyectos'}`;qs('.empty-state').hidden=n!==0}
+ function apply(){let n=0;rows.forEach(row=>{const visible=(filter==='todos'||row.dataset.category===filter)&&normalize(row.dataset.projectName).includes(normalize(search.value));row.hidden=!visible;if(visible)n++});buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));count.textContent='';qs('.empty-state').hidden=n!==0}
  buttons.forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;apply();const url=new URL(location.href);if(filter==='todos')url.searchParams.delete('categoria');else url.searchParams.set('categoria',filter);history.replaceState(null,'',url)}));search.addEventListener('input',apply);qs('#resetFilters').addEventListener('click',()=>{filter='todos';search.value='';apply();const url=new URL(location.href);url.searchParams.delete('categoria');history.replaceState(null,'',url);search.focus()});apply();
 }
 const form=qs('#briefForm');
