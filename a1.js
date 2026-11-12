@@ -17,6 +17,7 @@ qsa('[data-lightbox]').forEach(b=>b.addEventListener('click',()=>openPhoto(b.dat
 const gallery=qs('.gallery');
 if(gallery){
  const slides=qsa('[data-slide]',gallery), numbers=qs('#slideNumber');let current=0,start=null;
+ qs('.gallery-track i',gallery).style.width=`${100/slides.length}%`;
  function showSlide(index){current=(index+slides.length)%slides.length;slides.forEach((s,i)=>{s.hidden=i!==current;s.classList.toggle('is-active',i===current)});numbers.textContent=String(current+1).padStart(2,'0');qs('.gallery-track i',gallery).style.transform=`translateX(${current*100}%)`;qs('#slideCaption',gallery).textContent=slides[current].dataset.caption;qs('#slideSource',gallery).href=slides[current].dataset.href}
  qs('[data-gallery-prev]',gallery).addEventListener('click',()=>showSlide(current-1));qs('[data-gallery-next]',gallery).addEventListener('click',()=>showSlide(current+1));
  gallery.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();showSlide(current+(e.key==='ArrowRight'?1:-1))}});
