@@ -20,6 +20,7 @@ for name,s in pages.items():
   url=urlsplit(value)
   if not url.scheme and not url.netloc:
    target=unquote(url.path) or name
+   if target in ('.', './'):target='index.html'
    if url.path and not (p/target).is_file():errors.append((name,'missing '+url.path))
    if url.fragment and target in pages and url.fragment not in pages[target].ids:errors.append((name,'fragment '+url.fragment))
  for text in ['wa.me','whatsapp','atlasSvg','id="model"','data-place','Estudio 360']:
