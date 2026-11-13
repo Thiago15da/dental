@@ -64,7 +64,7 @@ def gallery():
  slides = []
  for i, (filename, alt, caption, category, headline, href, width, height) in enumerate(photos):
   portrait = ' portrait-slide' if height > width else ''
-  companion = {2: 'portada-4.jpg', 3: 'portada-3.jpg', 5: 'portada-3.jpg'}.get(i)
+  companion = {2: 'portada-4.jpg', 3: 'portada-3.jpg', 5: 'panteon-1.jpg'}.get(i)
   style = f' style="--companion-image:url(assets/photos/{companion})"' if companion else ''
   priority = ' fetchpriority="high"' if i == 0 else ' loading="lazy"'
   hidden = ' hidden' if i else ''
