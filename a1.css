@@ -19,8 +19,9 @@
 .contact-emails{display:grid;gap:18px;margin-top:28px}.brief-intro .contact-emails p{margin:0;font-size:13px;line-height:1.65}.contact-emails a{color:var(--deep);text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}.footer-links a[href^="mailto:"]{overflow-wrap:anywhere}
 .footer-place>a{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:11px;text-decoration:underline;text-underline-offset:4px}.footer-place>a .icon{width:14px;height:14px}
 
-/* Las imágenes verticales elegidas para la portada conservan la maqueta completa. */
-.gallery-slide.portrait-slide{isolation:isolate}
-.gallery-slide.portrait-slide:before{content:"";position:absolute;inset:-40px;background-image:var(--slide-image);background-position:center;background-size:cover;filter:blur(28px) brightness(.38);z-index:-1}
-.gallery-slide.portrait-slide img{width:min(68%,750px);margin-left:auto;object-fit:contain;object-position:center}
-@media(max-width:800px){.gallery-slide.portrait-slide img{width:100%}.gallery-slide.portrait-slide:before{filter:blur(26px) brightness(.3)}}
+/* Pares de fotos verticales completos, sin ampliar ni desenfocar el fondo. */
+.gallery-slide.portrait-slide{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#10282d;isolation:isolate}
+.gallery-slide.portrait-slide:before{content:"";grid-column:1;grid-row:1;background-image:var(--companion-image);background-position:center;background-size:contain;background-repeat:no-repeat}
+.gallery-slide.portrait-slide img{grid-column:2;grid-row:1;width:100%;height:100%;object-fit:contain;object-position:center}
+.gallery-slide.portrait-slide:after{background:linear-gradient(90deg,#001c26b0 0%,transparent 50%),linear-gradient(0deg,#001c2680,transparent 45%)}
+@media(max-width:700px){.gallery-slide.portrait-slide{grid-template-columns:1fr}.gallery-slide.portrait-slide:before{display:none}.gallery-slide.portrait-slide img{grid-column:1}.gallery-slide.portrait-slide figcaption{left:18px;bottom:25px;max-width:75%}.gallery-slide.portrait-slide:after{background:linear-gradient(0deg,#001c26a8,transparent 52%)}}
