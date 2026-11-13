@@ -56,16 +56,15 @@ def gallery():
  photos = [
   ('portada-1.jpg', 'Maqueta iluminada de un conjunto de torres', 'Torres a escala · Edificios', 'Edificios', 'Volúmenes que<br>se entienden.', 'edificios.html', 2200, 1465),
   ('portada-2.jpg', 'Maqueta arquitectónica de edificios residenciales', 'Edificios residenciales · A1 Maquetas', 'Edificios', 'Arquitectura<br>para mirar de cerca.', 'edificios.html', 1600, 1026),
-  ('portada-3.jpg', 'Maqueta iluminada de un edificio residencial', 'Edificio residencial · A1 Maquetas', 'Edificios', 'La ciudad<br>en otra escala.', 'edificios.html', 1200, 1800),
-  ('portada-4.jpg', 'Maqueta del edificio Sudameris exhibida en sus oficinas', 'Sudameris · Edificios', 'Edificios', 'Cada detalle<br>cobra forma.', 'edificios.html#proyecto-1', 1350, 1800),
+  ('riviere-3.jpg', 'Maqueta del edificio Riviere', 'Riviere · Edificios', 'Edificios', 'La ciudad<br>en otra escala.', 'edificios.html#proyecto-3', 1200, 800),
+  ('benedicta-1.jpg', 'Maqueta de loteamiento Benedicta', 'Benedicta · Loteamientos', 'Loteamientos', 'El territorio<br>toma forma.', 'loteamientos.html#proyecto-3', 1400, 762),
   ('portada-5.jpg', 'Maqueta de una instalación industrial a escala', 'Proyecto industrial · A1 Maquetas', 'Especiales', 'También hacemos<br>lo singular.', 'especiales.html', 2200, 1465),
-  ('portada-6.jpg', 'Maqueta de la fachada de un edificio histórico', 'Arquitectura histórica · A1 Maquetas', 'Especiales', 'El patrimonio<br>en nuestras manos.', 'especiales.html', 1200, 1800),
+  ('unves-2.jpg', 'Maqueta del proyecto UNVES', 'UNVES · Especiales', 'Especiales', 'Cada espacio<br>cuenta.', 'especiales.html#proyecto-2', 1400, 933),
  ]
  slides = []
  for i, (filename, alt, caption, category, headline, href, width, height) in enumerate(photos):
   portrait = ' portrait-slide' if height > width else ''
-  companion = {2: 'portada-4.jpg', 3: 'portada-3.jpg', 5: 'panteon-1.jpg'}.get(i)
-  style = f' style="--companion-image:url(assets/photos/{companion})"' if companion else ''
+  style = ''
   priority = ' fetchpriority="high"' if i == 0 else ' loading="lazy"'
   hidden = ' hidden' if i else ''
   slides.append(f'<figure class="gallery-slide{portrait}{" is-active" if i == 0 else ""}" data-slide="{i}" data-caption="{esc(caption)}" data-href="{href}" role="group" aria-roledescription="diapositiva" aria-label="{i+1} de {len(photos)}"{style}{hidden}><img src="assets/photos/{filename}" width="{width}" height="{height}"{priority} alt="{esc(alt)}"><figcaption><span>{i+1:02d} / {esc(category)}</span><strong>{headline}</strong></figcaption></figure>')
